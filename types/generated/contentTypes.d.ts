@@ -585,6 +585,53 @@ export interface PluginContentReleasesReleaseAction
   };
 }
 
+export interface PluginI18NLocale extends Schema.CollectionType {
+  collectionName: 'i18n_locale';
+  info: {
+    singularName: 'locale';
+    pluralName: 'locales';
+    collectionName: 'locales';
+    displayName: 'Locale';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+          max: 50;
+        },
+        number
+      >;
+    code: Attribute.String & Attribute.Unique;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUsersPermissionsPermission
   extends Schema.CollectionType {
   collectionName: 'up_permissions';
@@ -736,53 +783,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface PluginI18NLocale extends Schema.CollectionType {
-  collectionName: 'i18n_locale';
-  info: {
-    singularName: 'locale';
-    pluralName: 'locales';
-    collectionName: 'locales';
-    displayName: 'Locale';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    name: Attribute.String &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-          max: 50;
-        },
-        number
-      >;
-    code: Attribute.String & Attribute.Unique;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::i18n.locale',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::i18n.locale',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiAboutAbout extends Schema.SingleType {
   collectionName: 'abouts';
   info: {
@@ -819,7 +819,8 @@ export interface ApiBeaconBeacon extends Schema.CollectionType {
   info: {
     singularName: 'beacon';
     pluralName: 'beacons';
-    displayName: 'beacon';
+    displayName: 'Beacon';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -849,16 +850,14 @@ export interface ApiBeaconLogBeaconLog extends Schema.CollectionType {
   info: {
     singularName: 'beacon-log';
     pluralName: 'beacon-logs';
-    displayName: 'beacon_log';
+    displayName: 'BeaconLog';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
+    uuid: Attribute.String;
     name: Attribute.String;
-    user_id: Attribute.Integer;
-    beacon_id: Attribute.Integer;
-    company_id: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -882,7 +881,8 @@ export interface ApiCompanyCompany extends Schema.CollectionType {
   info: {
     singularName: 'company';
     pluralName: 'companies';
-    displayName: 'company';
+    displayName: 'Company';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -945,7 +945,7 @@ export interface ApiUserHistoryUserHistory extends Schema.CollectionType {
   info: {
     singularName: 'user-history';
     pluralName: 'user-histories';
-    displayName: 'user_history';
+    displayName: 'UserHistory';
   };
   options: {
     draftAndPublish: true;
@@ -986,10 +986,10 @@ declare module '@strapi/types' {
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
+      'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'plugin::i18n.locale': PluginI18NLocale;
       'api::about.about': ApiAboutAbout;
       'api::beacon.beacon': ApiBeaconBeacon;
       'api::beacon-log.beacon-log': ApiBeaconLogBeaconLog;

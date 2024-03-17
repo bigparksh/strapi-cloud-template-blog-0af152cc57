@@ -4,24 +4,18 @@
   "info": {
     "singularName": "beacon-log",
     "pluralName": "beacon-logs",
-    "displayName": "beacon_log"
+    "displayName": "BeaconLog"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
+    "uuid": {
       "type": "string"
     },
-    "user_id": {
-      "type": "integer"
-    },
-    "beacon_id": {
-      "type": "integer"
-    },
-    "company_id": {
-      "type": "integer"
+    "name": {
+      "type": "string"
     }
   }
 }

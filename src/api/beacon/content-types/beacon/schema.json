@@ -4,7 +4,8 @@
   "info": {
     "singularName": "beacon",
     "pluralName": "beacons",
-    "displayName": "beacon"
+    "displayName": "Beacon",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false

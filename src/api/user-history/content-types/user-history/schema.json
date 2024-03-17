@@ -4,7 +4,7 @@
   "info": {
     "singularName": "user-history",
     "pluralName": "user-histories",
-    "displayName": "user_history"
+    "displayName": "UserHistory"
   },
   "options": {
     "draftAndPublish": true
