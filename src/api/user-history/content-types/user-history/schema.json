@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_histories",
+  "info": {
+    "singularName": "user-history",
+    "pluralName": "user-histories",
+    "displayName": "user_history"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user_id": {
+      "type": "integer"
+    },
+    "beacon_id": {
+      "type": "integer"
+    },
+    "status": {
+      "type": "string"
+    }
+  }
+}

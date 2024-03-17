@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "beacons",
+  "info": {
+    "singularName": "beacon",
+    "pluralName": "beacons",
+    "displayName": "beacon"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "uuid": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    }
+  }
+}
