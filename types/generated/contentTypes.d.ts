@@ -765,7 +765,7 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    phoneNumber: Attribute.String & Attribute.Required & Attribute.Unique;
+    phoneNumber: Attribute.String;
     type: Attribute.Enumeration<['sender', 'worker']>;
     company: Attribute.Relation<
       'plugin::users-permissions.user',
@@ -776,6 +776,16 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'plugin::users-permissions.user',
       'oneToOne',
       'api::building.building'
+    >;
+    parentBeacon: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::beacon.beacon'
+    >;
+    childBeacon: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::beacon.beacon'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -857,51 +867,13 @@ export interface ApiBeaconLogBeaconLog extends Schema.CollectionType {
   };
 }
 
-export interface ApiBeaconOnBuildingBeaconOnBuilding
-  extends Schema.CollectionType {
-  collectionName: 'beacon_on_buildings';
-  info: {
-    singularName: 'beacon-on-building';
-    pluralName: 'beacon-on-buildings';
-    displayName: '\uAC74\uBB3C\uC5D0\uC124\uCE58\uB41C\uBE44\uCF58';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    beacon: Attribute.Relation<
-      'api::beacon-on-building.beacon-on-building',
-      'oneToOne',
-      'api::beacon.beacon'
-    >;
-    company: Attribute.Relation<
-      'api::beacon-on-building.beacon-on-building',
-      'oneToOne',
-      'api::company.company'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::beacon-on-building.beacon-on-building',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::beacon-on-building.beacon-on-building',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiBuildingBuilding extends Schema.CollectionType {
   collectionName: 'buildings';
   info: {
     singularName: 'building';
     pluralName: 'buildings';
     displayName: '\uAC74\uBB3C';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -909,6 +881,11 @@ export interface ApiBuildingBuilding extends Schema.CollectionType {
   attributes: {
     name: Attribute.String;
     address: Attribute.String;
+    beacons: Attribute.Relation<
+      'api::building.building',
+      'oneToMany',
+      'api::beacon.beacon'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1008,7 +985,6 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::beacon.beacon': ApiBeaconBeacon;
       'api::beacon-log.beacon-log': ApiBeaconLogBeaconLog;
-      'api::beacon-on-building.beacon-on-building': ApiBeaconOnBuildingBeaconOnBuilding;
       'api::building.building': ApiBuildingBuilding;
       'api::company.company': ApiCompanyCompany;
       'api::user-entry-exit-history.user-entry-exit-history': ApiUserEntryExitHistoryUserEntryExitHistory;

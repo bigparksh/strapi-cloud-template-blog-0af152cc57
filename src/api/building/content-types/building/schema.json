@@ -4,7 +4,8 @@
   "info": {
     "singularName": "building",
     "pluralName": "buildings",
-    "displayName": "건물"
+    "displayName": "건물",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -16,6 +17,11 @@
     },
     "address": {
       "type": "string"
+    },
+    "beacons": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::beacon.beacon"
     }
   }
 }
