@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "beacon_on_buildings",
+  "info": {
+    "singularName": "beacon-on-building",
+    "pluralName": "beacon-on-buildings",
+    "displayName": "건물에설치된비콘"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "beacon": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::beacon.beacon"
+    },
+    "company": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::company.company"
+    }
+  }
+}

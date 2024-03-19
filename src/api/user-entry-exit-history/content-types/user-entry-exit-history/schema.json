@@ -1,31 +1,27 @@
 {
   "kind": "collectionType",
-  "collectionName": "beacon_logs",
+  "collectionName": "user_entry_exit_histories",
   "info": {
-    "singularName": "beacon-log",
-    "pluralName": "beacon-logs",
-    "displayName": "비콘로그",
-    "description": ""
+    "singularName": "user-entry-exit-history",
+    "pluralName": "user-entry-exit-histories",
+    "displayName": "노동자출입내역"
   },
   "options": {
     "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "uuid": {
-      "type": "string"
-    },
     "user_id": {
       "type": "integer"
     },
     "type": {
       "type": "enumeration",
       "enum": [
-        "parent",
-        "child"
+        "entry",
+        "exit"
       ]
     },
-    "beacon_id": {
+    "company_id": {
       "type": "integer"
     }
   }

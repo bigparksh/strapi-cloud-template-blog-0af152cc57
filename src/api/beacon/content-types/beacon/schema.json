@@ -4,7 +4,7 @@
   "info": {
     "singularName": "beacon",
     "pluralName": "beacons",
-    "displayName": "Beacon",
+    "displayName": "비콘",
     "description": ""
   },
   "options": {
@@ -13,10 +13,9 @@
   "pluginOptions": {},
   "attributes": {
     "uuid": {
-      "type": "string"
-    },
-    "name": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }

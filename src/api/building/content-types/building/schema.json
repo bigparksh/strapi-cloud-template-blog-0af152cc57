@@ -1,11 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "companies",
+  "collectionName": "buildings",
   "info": {
-    "singularName": "company",
-    "pluralName": "companies",
-    "displayName": "회사",
-    "description": ""
+    "singularName": "building",
+    "pluralName": "buildings",
+    "displayName": "건물"
   },
   "options": {
     "draftAndPublish": false
@@ -13,6 +12,9 @@
   "pluginOptions": {},
   "attributes": {
     "name": {
+      "type": "string"
+    },
+    "address": {
       "type": "string"
     }
   }

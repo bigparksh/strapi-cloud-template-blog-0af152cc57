@@ -6,7 +6,7 @@
     "description": "",
     "singularName": "user",
     "pluralName": "users",
-    "displayName": "User"
+    "displayName": "사용자(송출자&노동자)"
   },
   "options": {
     "draftAndPublish": false
@@ -65,8 +65,27 @@
       "inversedBy": "users",
       "configurable": false
     },
+    "phoneNumber": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
     "type": {
-      "type": "string"
+      "type": "enumeration",
+      "enum": [
+        "sender",
+        "worker"
+      ]
+    },
+    "company": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::company.company"
+    },
+    "building": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::building.building"
     }
   }
 }

@@ -733,7 +733,7 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     description: '';
     singularName: 'user';
     pluralName: 'users';
-    displayName: 'User';
+    displayName: '\uC0AC\uC6A9\uC790(\uC1A1\uCD9C\uC790&\uB178\uB3D9\uC790)';
   };
   options: {
     draftAndPublish: false;
@@ -765,7 +765,18 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    type: Attribute.String;
+    phoneNumber: Attribute.String & Attribute.Required & Attribute.Unique;
+    type: Attribute.Enumeration<['sender', 'worker']>;
+    company: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::company.company'
+    >;
+    building: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::building.building'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -776,37 +787,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'plugin::users-permissions.user',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiAboutAbout extends Schema.SingleType {
-  collectionName: 'abouts';
-  info: {
-    singularName: 'about';
-    pluralName: 'abouts';
-    displayName: 'About';
-    description: 'Write about yourself and the content you create';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    title: Attribute.String;
-    blocks: Attribute.DynamicZone<[]>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::about.about',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::about.about',
       'oneToOne',
       'admin::user'
     > &
@@ -819,15 +799,14 @@ export interface ApiBeaconBeacon extends Schema.CollectionType {
   info: {
     singularName: 'beacon';
     pluralName: 'beacons';
-    displayName: 'Beacon';
+    displayName: '\uBE44\uCF58';
     description: '';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
-    uuid: Attribute.String;
-    name: Attribute.String;
+    uuid: Attribute.String & Attribute.Required & Attribute.Unique;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -850,17 +829,19 @@ export interface ApiBeaconLogBeaconLog extends Schema.CollectionType {
   info: {
     singularName: 'beacon-log';
     pluralName: 'beacon-logs';
-    displayName: 'BeaconLog';
+    displayName: '\uBE44\uCF58\uB85C\uADF8';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     uuid: Attribute.String;
-    name: Attribute.String;
+    user_id: Attribute.Integer;
+    type: Attribute.Enumeration<['parent', 'child']>;
+    beacon_id: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::beacon-log.beacon-log',
       'oneToOne',
@@ -869,6 +850,75 @@ export interface ApiBeaconLogBeaconLog extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::beacon-log.beacon-log',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBeaconOnBuildingBeaconOnBuilding
+  extends Schema.CollectionType {
+  collectionName: 'beacon_on_buildings';
+  info: {
+    singularName: 'beacon-on-building';
+    pluralName: 'beacon-on-buildings';
+    displayName: '\uAC74\uBB3C\uC5D0\uC124\uCE58\uB41C\uBE44\uCF58';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    beacon: Attribute.Relation<
+      'api::beacon-on-building.beacon-on-building',
+      'oneToOne',
+      'api::beacon.beacon'
+    >;
+    company: Attribute.Relation<
+      'api::beacon-on-building.beacon-on-building',
+      'oneToOne',
+      'api::company.company'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::beacon-on-building.beacon-on-building',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::beacon-on-building.beacon-on-building',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBuildingBuilding extends Schema.CollectionType {
+  collectionName: 'buildings';
+  info: {
+    singularName: 'building';
+    pluralName: 'buildings';
+    displayName: '\uAC74\uBB3C';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Attribute.String;
+    address: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::building.building',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::building.building',
       'oneToOne',
       'admin::user'
     > &
@@ -881,58 +931,24 @@ export interface ApiCompanyCompany extends Schema.CollectionType {
   info: {
     singularName: 'company';
     pluralName: 'companies';
-    displayName: 'Company';
+    displayName: '\uD68C\uC0AC';
     description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String;
-    address: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::company.company',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::company.company',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiGlobalGlobal extends Schema.SingleType {
-  collectionName: 'globals';
-  info: {
-    singularName: 'global';
-    pluralName: 'globals';
-    displayName: 'Global';
-    description: 'Define global settings';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
-    siteName: Attribute.String & Attribute.Required;
-    favicon: Attribute.Media;
-    siteDescription: Attribute.Text & Attribute.Required;
+    name: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::global.global',
+      'api::company.company',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::global.global',
+      'api::company.company',
       'oneToOne',
       'admin::user'
     > &
@@ -940,31 +956,31 @@ export interface ApiGlobalGlobal extends Schema.SingleType {
   };
 }
 
-export interface ApiUserHistoryUserHistory extends Schema.CollectionType {
-  collectionName: 'user_histories';
+export interface ApiUserEntryExitHistoryUserEntryExitHistory
+  extends Schema.CollectionType {
+  collectionName: 'user_entry_exit_histories';
   info: {
-    singularName: 'user-history';
-    pluralName: 'user-histories';
-    displayName: 'UserHistory';
+    singularName: 'user-entry-exit-history';
+    pluralName: 'user-entry-exit-histories';
+    displayName: '\uB178\uB3D9\uC790\uCD9C\uC785\uB0B4\uC5ED';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     user_id: Attribute.Integer;
-    beacon_id: Attribute.Integer;
-    status: Attribute.String;
+    type: Attribute.Enumeration<['entry', 'exit']>;
+    company_id: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::user-history.user-history',
+      'api::user-entry-exit-history.user-entry-exit-history',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::user-history.user-history',
+      'api::user-entry-exit-history.user-entry-exit-history',
       'oneToOne',
       'admin::user'
     > &
@@ -990,12 +1006,12 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::about.about': ApiAboutAbout;
       'api::beacon.beacon': ApiBeaconBeacon;
       'api::beacon-log.beacon-log': ApiBeaconLogBeaconLog;
+      'api::beacon-on-building.beacon-on-building': ApiBeaconOnBuildingBeaconOnBuilding;
+      'api::building.building': ApiBuildingBuilding;
       'api::company.company': ApiCompanyCompany;
-      'api::global.global': ApiGlobalGlobal;
-      'api::user-history.user-history': ApiUserHistoryUserHistory;
+      'api::user-entry-exit-history.user-entry-exit-history': ApiUserEntryExitHistoryUserEntryExitHistory;
     }
   }
 }
