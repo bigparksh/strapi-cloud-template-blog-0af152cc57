@@ -6,7 +6,7 @@
     "description": "",
     "singularName": "user",
     "pluralName": "users",
-    "displayName": "사용자(송출자&노동자)"
+    "displayName": "04.사용자(송출자&노동자)"
   },
   "options": {
     "draftAndPublish": false

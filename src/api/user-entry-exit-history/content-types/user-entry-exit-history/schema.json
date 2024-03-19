@@ -4,7 +4,7 @@
   "info": {
     "singularName": "user-entry-exit-history",
     "pluralName": "user-entry-exit-histories",
-    "displayName": "노동자출입내역"
+    "displayName": "03.노동자출입내역"
   },
   "options": {
     "draftAndPublish": false

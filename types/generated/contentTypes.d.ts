@@ -733,7 +733,7 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     description: '';
     singularName: 'user';
     pluralName: 'users';
-    displayName: '\uC0AC\uC6A9\uC790(\uC1A1\uCD9C\uC790&\uB178\uB3D9\uC790)';
+    displayName: '04.\uC0AC\uC6A9\uC790(\uC1A1\uCD9C\uC790&\uB178\uB3D9\uC790)';
   };
   options: {
     draftAndPublish: false;
@@ -809,7 +809,7 @@ export interface ApiBeaconBeacon extends Schema.CollectionType {
   info: {
     singularName: 'beacon';
     pluralName: 'beacons';
-    displayName: '\uBE44\uCF58';
+    displayName: '01.\uBE44\uCF58';
     description: '';
   };
   options: {
@@ -839,7 +839,7 @@ export interface ApiBeaconLogBeaconLog extends Schema.CollectionType {
   info: {
     singularName: 'beacon-log';
     pluralName: 'beacon-logs';
-    displayName: '\uBE44\uCF58\uB85C\uADF8';
+    displayName: '02.\uBE44\uCF58\uB85C\uADF8';
     description: '';
   };
   options: {
@@ -872,7 +872,7 @@ export interface ApiBuildingBuilding extends Schema.CollectionType {
   info: {
     singularName: 'building';
     pluralName: 'buildings';
-    displayName: '\uAC74\uBB3C';
+    displayName: '06.\uAC74\uBB3C';
     description: '';
   };
   options: {
@@ -908,7 +908,7 @@ export interface ApiCompanyCompany extends Schema.CollectionType {
   info: {
     singularName: 'company';
     pluralName: 'companies';
-    displayName: '\uD68C\uC0AC';
+    displayName: '05.\uD68C\uC0AC';
     description: '';
   };
   options: {
@@ -939,7 +939,7 @@ export interface ApiUserEntryExitHistoryUserEntryExitHistory
   info: {
     singularName: 'user-entry-exit-history';
     pluralName: 'user-entry-exit-histories';
-    displayName: '\uB178\uB3D9\uC790\uCD9C\uC785\uB0B4\uC5ED';
+    displayName: '03.\uB178\uB3D9\uC790\uCD9C\uC785\uB0B4\uC5ED';
   };
   options: {
     draftAndPublish: false;
