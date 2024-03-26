@@ -27,6 +27,21 @@
     },
     "beacon_id": {
       "type": "integer"
+    },
+    "building_id": {
+      "type": "integer"
+    },
+    "building_name": {
+      "type": "string"
+    },
+    "building_address": {
+      "type": "string"
+    },
+    "building_floor": {
+      "type": "string"
+    },
+    "building_line": {
+      "type": "string"
     }
   }
 }

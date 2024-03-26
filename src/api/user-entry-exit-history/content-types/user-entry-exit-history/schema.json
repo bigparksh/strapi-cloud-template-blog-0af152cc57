@@ -4,7 +4,8 @@
   "info": {
     "singularName": "user-entry-exit-history",
     "pluralName": "user-entry-exit-histories",
-    "displayName": "03.노동자출입내역"
+    "displayName": "03.노동자출입내역",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -23,6 +24,15 @@
     },
     "company_id": {
       "type": "integer"
+    },
+    "building_id": {
+      "type": "integer"
+    },
+    "building_name": {
+      "type": "string"
+    },
+    "building_address": {
+      "type": "string"
     }
   }
 }

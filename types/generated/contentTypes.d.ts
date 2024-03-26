@@ -817,6 +817,13 @@ export interface ApiBeaconBeacon extends Schema.CollectionType {
   };
   attributes: {
     uuid: Attribute.String & Attribute.Required & Attribute.Unique;
+    building: Attribute.Relation<
+      'api::beacon.beacon',
+      'oneToOne',
+      'api::building.building'
+    >;
+    building_floor: Attribute.String;
+    building_line: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -850,6 +857,11 @@ export interface ApiBeaconLogBeaconLog extends Schema.CollectionType {
     user_id: Attribute.Integer;
     type: Attribute.Enumeration<['parent', 'child']>;
     beacon_id: Attribute.Integer;
+    building_id: Attribute.Integer;
+    building_name: Attribute.String;
+    building_address: Attribute.String;
+    building_floor: Attribute.String;
+    building_line: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -881,11 +893,6 @@ export interface ApiBuildingBuilding extends Schema.CollectionType {
   attributes: {
     name: Attribute.String;
     address: Attribute.String;
-    beacons: Attribute.Relation<
-      'api::building.building',
-      'oneToMany',
-      'api::beacon.beacon'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -940,6 +947,7 @@ export interface ApiUserEntryExitHistoryUserEntryExitHistory
     singularName: 'user-entry-exit-history';
     pluralName: 'user-entry-exit-histories';
     displayName: '03.\uB178\uB3D9\uC790\uCD9C\uC785\uB0B4\uC5ED';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -948,6 +956,9 @@ export interface ApiUserEntryExitHistoryUserEntryExitHistory
     user_id: Attribute.Integer;
     type: Attribute.Enumeration<['entry', 'exit']>;
     company_id: Attribute.Integer;
+    building_id: Attribute.Integer;
+    building_name: Attribute.String;
+    building_address: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

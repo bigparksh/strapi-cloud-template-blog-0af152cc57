@@ -17,11 +17,6 @@
     },
     "address": {
       "type": "string"
-    },
-    "beacons": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::beacon.beacon"
     }
   }
 }
